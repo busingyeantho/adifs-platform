@@ -1,10 +1,12 @@
 import Button from "@/components/ui/Button";
+import Container from "@/components/ui/Container";
 
 export default function HeroSection() {
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-gray-100 px-6">
 
-      <div className="max-w-4xl text-center space-y-8">
+      <Container>
+        <div className="text-center space-y-8">
 
         {/* Badge */}
         <div className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 text-sm font-medium">
@@ -35,8 +37,9 @@ export default function HeroSection() {
           />
 
         </div>
-
       </div>
+
+      </Container>
 
     </section>
   );
