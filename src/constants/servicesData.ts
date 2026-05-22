@@ -1,3 +1,6 @@
+// Centralized services data source.
+// Later replaceable with API or CMS data.
+
 export const servicesData = [
   {
     title: "Mobile App Development",
