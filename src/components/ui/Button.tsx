@@ -1,4 +1,5 @@
 import React from "react";
+import { theme } from "@/constants/theme";
 
 type ButtonProps = {
   text: string;
@@ -9,13 +10,32 @@ export default function Button({
   text,
   variant = "primary",
 }: ButtonProps) {
+  const isPrimary = variant === "primary";
+
   return (
     <button
-      className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-        variant === "primary"
-          ? "bg-indigo-600 text-white hover:bg-indigo-700"
-          : "border border-gray-400 text-gray-800 hover:bg-gray-100"
-      }`}
+      style={{
+        backgroundColor: isPrimary
+          ? theme.colors.primary
+          : "transparent",
+
+        color: isPrimary
+          ? theme.colors.textLight
+          : theme.colors.textDark,
+
+        border: isPrimary
+          ? "none"
+          : `1px solid ${theme.colors.borderLight}`,
+      }}
+      className="
+        px-6
+        py-3
+        rounded-full
+        font-medium
+        transition-all
+        duration-300
+        hover:scale-105
+      "
     >
       {text}
     </button>

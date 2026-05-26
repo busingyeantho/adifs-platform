@@ -2,12 +2,13 @@ import ServiceCard from "@/components/ui/ServiceCard";
 import { servicesData } from "@/constants/servicesData";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
-import FadeIn from "@/components/ui/FadeIn";
+import MotionSection from "@/components/ui/MotionSection";
+import { layout } from "@/constants/layout";
 
 export default function ServicesSection() {
   return (
-    <section className="py-24 px-6 bg-gray-50">
-      <FadeIn>
+    <section className={layout.sectionSpacing + " px-6 bg-gray-50"}>
+      <MotionSection>
 
         <Container>
 
@@ -32,7 +33,7 @@ export default function ServicesSection() {
           </div>
 
         </Container>
-      </FadeIn>
+      </MotionSection>
 
     </section>
   );
