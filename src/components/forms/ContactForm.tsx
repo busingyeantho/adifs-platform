@@ -3,6 +3,10 @@
 import { useState } from "react";
 import InputField from "./InputField";
 import Button from "../ui/Button";
+import {
+  sendContactMessage,
+  validateContactForm,
+} from "@/services/contact";
 
 export default function ContactForm() {
 
@@ -14,51 +18,48 @@ export default function ContactForm() {
   // Loading state
   const [loading, setLoading] = useState(false);
 
-  // Validation state
+  // Feedback state
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  async function handleSubmit(
-    e: React.FormEvent
-  ) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     setError("");
+    setSuccess("");
 
-    // Basic validation
-    if (!name || !email || !message) {
-      setError("Please fill in all fields.");
+    const validationError = validateContactForm({
+      name,
+      email,
+      message,
+    });
+
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
     try {
       setLoading(true);
 
-      // Simulate API delay
-      await new Promise((resolve) =>
-        setTimeout(resolve, 1500)
-      );
-
-      console.log({
+      await sendContactMessage({
         name,
         email,
         message,
       });
 
-      alert("Message sent successfully!");
-
-      // Reset form
+      setSuccess("Your message has been sent successfully. I will reply soon.");
       setName("");
       setEmail("");
       setMessage("");
-
     } catch (error) {
-
-      setError("Something went wrong.");
-
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong."
+      );
     } finally {
-
       setLoading(false);
-
     }
   }
 
@@ -131,8 +132,19 @@ export default function ContactForm() {
         </p>
       )}
 
+      {success && (
+        <p className="bg-green-50 border border-green-200 text-green-800 rounded-xl px-4 py-3 text-sm">
+          {success}
+        </p>
+      )}
+
       {/* Submit Button */}
-     /
+      <Button
+        type="submit"
+        disabled={loading}
+        text={loading ? "Sending..." : "Send Message"}
+        className="w-full"
+      />
 
     </form>
   );
