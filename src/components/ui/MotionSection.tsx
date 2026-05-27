@@ -15,7 +15,7 @@ export default function MotionSection({ children }: Props) {
       initial={motionConfig.section.initial}
       whileInView={motionConfig.section.whileInView}
       viewport={motionConfig.section.viewport}
-      transition={{ duration: 0.6, ease: "easeOut" } as Transition}
+      transition={motionConfig.section.transition as Transition}
     >
       {children}
     </motion.div>

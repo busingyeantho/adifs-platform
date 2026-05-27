@@ -1,4 +1,5 @@
 import { theme } from "@/constants/theme";
+import { typography } from "@/constants/typography";
 type SectionHeadingProps = {
   label: string;
   title: string;
@@ -14,19 +15,17 @@ export default function SectionHeading({
     <div className="text-center mb-16">
 
       <p
-  style={{
-    color: theme.colors.primary,
-  }}
-  className="font-semibold mb-3 uppercase tracking-wide"
->
-  {label}
-</p>
+        style={{ color: theme.colors.primary }}
+        className="font-semibold mb-3 uppercase tracking-wide"
+      >
+        {label}
+      </p>
 
-      <h2 className="text-4xl md:text-5xl font-bold mb-6">
+      <h2 className={typography.h2 + " mb-6 text-gray-900"}>
         {title}
       </h2>
 
-      <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+      <p className={typography.body + " max-w-2xl mx-auto text-gray-600"}>
         {description}
       </p>
 

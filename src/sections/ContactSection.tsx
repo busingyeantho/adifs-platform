@@ -2,10 +2,11 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ContactForm from "@/components/forms/ContactForm";
 import MotionSection from "@/components/ui/MotionSection";
+import { layout } from "@/constants/layout";
 
 export default function ContactSection() {
   return (
-    <section className="py-24 px-6 bg-white">
+    <section className={layout.sectionSpacing + " bg-white"}>
 
       <MotionSection>
 
