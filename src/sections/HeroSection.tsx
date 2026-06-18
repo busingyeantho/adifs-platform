@@ -1,51 +1,53 @@
+"use client";
+
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+import AnimatedElement from "@/components/ui/AnimatedElement";
 import { typography } from "@/constants/typography";
-import { theme } from "@/constants/theme";
 import MotionSection from "@/components/ui/MotionSection";
+import { sectionsContent } from "@/constants/sectionData";
+
+
 
 export default function HeroSection() {
-  return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-gray-100 px-6">
-      <MotionSection>
+  const { badge, titleMain, titleHighlight, description, ctaButtons } =
+    sectionsContent.hero;
 
+  return (
+    <section
+      className="min-h-screen flex items-center justify-center bg-accent"
+    >
+      <MotionSection>
         <Container>
           <div className="text-center space-y-8">
+            {/* Badge */}
+            <AnimatedElement delay={0}>
+              <div className="inline-block px-4 py-2 rounded-full bg-primaryLight text-textDark text-sm font-medium">
+                {badge}
+              </div>
+            </AnimatedElement>
 
-          {/* Badge */}
-          <div className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 text-sm font-medium">
-            African Digital Innovative Frontiers
+            {/* Heading */}
+            <AnimatedElement as="h1" delay={0.1} className={typography.h1}>
+              {titleMain}
+              <span className="text-primary">{titleHighlight}</span>
+            </AnimatedElement>
+
+            {/* Description */}
+            <AnimatedElement as="p" delay={0.2} className={`${typography.body} max-w-2xl mx-auto`}>
+              {description}
+            </AnimatedElement>
+
+            {/* CTA Buttons */}
+            <AnimatedElement delay={0.3}>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+                <Button text={ctaButtons.primary} />
+                <Button text={ctaButtons.secondary} variant="secondary" />
+              </div>
+            </AnimatedElement>
           </div>
-
-          {/* Heading */}
-          <h1 className={typography.h1}>
-            Building Africa’s Future Through
-            <span className="text-indigo-600"> Digital Innovation</span>
-          </h1>
-
-          {/* Description */}
-          <p className={typography.body + " max-w-2xl mx-auto"}>
-            ADIFs develops scalable web applications, AI systems,
-            digital products, creative content, and innovative
-            technology experiences for modern businesses and creators.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-
-            <Button text="Explore Services" />
-
-            <Button
-              text="Contact Us"
-              variant="secondary"
-            />
-
-          </div>
-        </div>
-
         </Container>
-        </MotionSection>
-
+      </MotionSection>
     </section>
   );
 }

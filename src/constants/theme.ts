@@ -1,9 +1,23 @@
+/*
+|--------------------------------------------------------------------------
+| ADIFs Design System
+|--------------------------------------------------------------------------
+|
+| Centralized visual identity system shared across:
+| - website UI
+| - future dashboards
+| - SaaS products
+| - mobile/web consistency layer
+|
+*/
+
 // Centralized ADIFs design system tokens.
 // Shared visual identity foundation for scalable UI consistency.
 
 export const theme = {
   colors: {
     primary: "#F28026",
+    primaryLight: "#FEF3E2",  // Light orange/cream background
     accent: "#D64927",
     success: "#00B4A6",
     info: "#4A90E2",

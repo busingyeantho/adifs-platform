@@ -26,19 +26,21 @@ export default function Button({
         backgroundColor: isPrimary
           ? theme.colors.primary
           : "transparent",
+          
 
         color: isPrimary
           ? theme.colors.textLight
-          : theme.colors.textDark,
+          : theme.colors.primaryLight,
 
         border: isPrimary
           ? "none"
           : `1px solid ${theme.colors.borderLight}`,
       }}
-      className={
-        `px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 ${className}` +
-        (disabled ? " opacity-50 cursor-not-allowed" : "")
-      }
+     className={
+  `px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 ` +
+  `${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} ` +
+  className
+}
     >
       {text ?? children}
     </button>
