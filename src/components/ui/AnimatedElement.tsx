@@ -19,7 +19,7 @@ export default function AnimatedElement({
   as = "div",
   motionProps = {},
 }: AnimatedElementProps) {
-  const MotionTag = motion[as as keyof typeof motion] as any;
+  const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
 
   return (
     <MotionTag
