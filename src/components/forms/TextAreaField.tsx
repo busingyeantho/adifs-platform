@@ -1,5 +1,5 @@
 import { useId } from "react";
-// TextAreaField is intentionally a thin wrapper over a native <input>.
+// TextAreaField is intentionally a thin wrapper over a native <textarea>.
 // We extend React.TextAreaHTMLAttributes to preserve compatibility with all
 type TextAreaProps =
   React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -14,7 +14,7 @@ export default function TextAreaField({
   ...textareaProps
 }: TextAreaProps) {
   const generatedId = useId();
-  const TextAreaId = textareaProps.id || generatedId;
+  const TextAreaFieldId = textareaProps.id || generatedId;
   
   return (
     <div className="flex flex-col gap-2">
@@ -22,14 +22,14 @@ export default function TextAreaField({
         The label is separated from the input to ensure good form structure.
         This also makes it easier to apply visual spacing and consistent styling.
       */}
-      <label htmlFor={TextAreaId}>
+      <label htmlFor={TextAreaFieldId}>
         {label}
       </label>
 
       <textarea
       
         {...textareaProps}
-          id={TextAreaId}
+          id={TextAreaFieldId}
   className={`
     w-full
     p-4

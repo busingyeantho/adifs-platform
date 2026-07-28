@@ -131,11 +131,6 @@ function handleInputChange(
           handleInputChange("message", e.target.value)
         }
     />
-            {errors.message && (
-      <p className="text-red-500 text-sm">
-        {errors.message}
-      </p>
-    )}
 
       </div>
 
