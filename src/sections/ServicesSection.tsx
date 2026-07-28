@@ -4,20 +4,23 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import MotionSection from "@/components/ui/MotionSection";
 import { layout } from "@/constants/layout";
+import { sectionsContent } from "@/constants/sectionData";
 
 export default function ServicesSection() {
+  const { label, title, description } = sectionsContent.services;
+
   return (
-    <section className={layout.sectionSpacing + " px-6 bg-gray-50"}>
+    <section className={layout.sectionSpacing + " bg-gray-50"}>
       <MotionSection>
 
         <Container>
 
           {/* Section Header */}
           <SectionHeading
-    label="SERVICES"
-    title="Digital Solutions & Innovation"
-    description="ADIFs delivers scalable digital solutions, creative systems, AI-powered experiences, and technology innovation services."
-  />
+            label={label}
+            title={title}
+            description={description}
+          />
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

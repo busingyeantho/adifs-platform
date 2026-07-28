@@ -6,54 +6,71 @@ import Button from "../ui/Button";
 import {
   sendContactMessage,
   validateContactForm,
+  type ContactFormData,
+  type ContactErrors,
 } from "@/services/contact";
+import TextAreaField from "./TextAreaField";
 
 export default function ContactForm() {
 
   // Controlled form state
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+ const [formData, setFormData] = useState<ContactFormData>({
+  name: "",
+  email: "",
+  message: "",
+});
 
   // Loading state
   const [loading, setLoading] = useState(false);
 
   // Feedback state
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState<ContactErrors>({});
+  const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState("");
+ 
+function handleInputChange(
+  field: keyof ContactFormData,
+  value: string
+) {
+   
+  setFormData((previous) => ({
+    ...previous,
+    [field]: value,
+  }));
 
+  setErrors((previous) => ({
+    ...previous,
+    [field]: undefined,
+  }));
+}
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    setError("");
+    setErrors({});
+    setFormError("");
     setSuccess("");
 
-    const validationError = validateContactForm({
-      name,
-      email,
-      message,
-    });
+    const validationError = validateContactForm(formData);
 
-    if (validationError) {
-      setError(validationError);
-      return;
-    }
+    if (
+  validationError.name ||
+  validationError.email ||
+  validationError.message
+) {
+  setErrors(validationError);
+  return;
+}
 
     try {
       setLoading(true);
 
-      await sendContactMessage({
-        name,
-        email,
-        message,
-      });
+      await sendContactMessage(formData);
+    
 
       setSuccess("Your message has been sent successfully. I will reply soon.");
-      setName("");
-      setEmail("");
-      setMessage("");
+      setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      setError(
+      setFormError(
         error instanceof Error
           ? error.message
           : "Something went wrong."
@@ -74,63 +91,61 @@ export default function ContactForm() {
         mx-auto
       "
     >
-
-      <InputField
+    {/* Name Field */}
+    <div className="flex flex-col gap-2 text-black">
+      <InputField error={errors.name}
         label="Full Name"
         placeholder="Enter your name"
-        value={name}
-        onChange={(e) =>
-          setName(e.target.value)
-        }
+        value={formData.name}
+        onChange={(e) =>{
+          handleInputChange("name", e.target.value);
+          
+        }}
       />
-
-      <InputField
+          
+    </div>
+    {/*Email Field */}
+    <div className="flex flex-col gap-2 text-black">
+      <InputField error={errors.email}
         label="Email Address"
         type="email"
         placeholder="Enter your email"
-        value={email}
-        onChange={(e) =>
-          setEmail(e.target.value)
-        }
+        value={formData.email}
+        onChange={(e) =>{
+          handleInputChange("email", e.target.value);
+          
+        
+        }}
       />
+    </div>
+      {/* Message Text Area */}
+    <div  className="flex flex-col gap-2">
 
-      {/* Message Field */}
-      <div className="flex flex-col gap-2">
-
-        <label className="font-medium text-gray-700">
-          Message
-        </label>
-
-        <textarea
-          placeholder="Write your message..."
-          value={message}
-          onChange={(e) =>
-            setMessage(e.target.value)
-          }
-          rows={6}
-          className="
-            w-full
-            p-4
-            rounded-xl
-            border
-            border-gray-300
-            outline-none
-            transition-all
-            duration-300
-            focus:border-orange-400
-            focus:ring-2
-            focus:ring-orange-200
-          "
-        />
+      <TextAreaField
+        label="Message"
+        placeholder="Write your message..."
+        value={formData.message}
+        error={errors.message}
+        rows={6}
+        onChange={(e) =>
+          handleInputChange("message", e.target.value)
+        }
+    />
+            {errors.message && (
+      <p className="text-red-500 text-sm">
+        {errors.message}
+      </p>
+    )}
 
       </div>
 
       {/* Error State */}
-      {error && (
+        {formError && (
         <p className="text-red-500 text-sm">
-          {error}
+          {formError}
         </p>
       )}
+      {/* Success */}
 
       {success && (
         <p className="bg-green-50 border border-green-200 text-green-800 rounded-xl px-4 py-3 text-sm">

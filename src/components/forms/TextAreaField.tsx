@@ -1,20 +1,20 @@
 import { useId } from "react";
-// InputField is intentionally a thin wrapper over a native <input>.
-// We extend React.InputHTMLAttributes to preserve compatibility with all
-type InputFieldProps =
-  React.InputHTMLAttributes<HTMLInputElement> & {
+// TextAreaField is intentionally a thin wrapper over a native <input>.
+// We extend React.TextAreaHTMLAttributes to preserve compatibility with all
+type TextAreaProps =
+  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
     label: string;
     error?: string;
   };
 
-export default function InputField({
+export default function TextAreaField({
   //standard input props while still requiring a visible label for clarity.
   label,
   error,
-  ...inputProps
-}: InputFieldProps) {
+  ...textareaProps
+}: TextAreaProps) {
   const generatedId = useId();
-  const inputId = inputProps.id || generatedId;
+  const TextAreaId = textareaProps.id || generatedId;
   
   return (
     <div className="flex flex-col gap-2">
@@ -22,14 +22,14 @@ export default function InputField({
         The label is separated from the input to ensure good form structure.
         This also makes it easier to apply visual spacing and consistent styling.
       */}
-      <label htmlFor={inputId}>
+      <label htmlFor={TextAreaId}>
         {label}
       </label>
 
-      <input
+      <textarea
       
-        {...inputProps}
-          id={inputId}
+        {...textareaProps}
+          id={TextAreaId}
   className={`
     w-full
     p-4
@@ -43,7 +43,7 @@ export default function InputField({
     focus:ring-2
     focus:ring-orange-200
     text-black
-    ${inputProps.className || ""}
+    ${textareaProps.className || ""}
   `}
   
 />

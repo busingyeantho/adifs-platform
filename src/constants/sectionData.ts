@@ -35,4 +35,28 @@ export const sectionsContent = {
     description:
       "Reach out to ADIFs for digital solutions, collaborations, AI systems, content creation, and scalable technology projects.",
   },
+
+  // Section-specific metadata (background, spacing, etc.)
+  metadata: {
+    hero: {
+      bgColor: "bg-accent",
+      spacing: "min-h-screen flex items-center justify-center",
+    },
+    about: {
+      bgColor: "bg-gray-50",
+      spacing: "py-20 px-6 md:px-12 lg:px-20",
+    },
+    services: {
+      bgColor: "bg-gray-50",
+      spacing: "py-20 px-6 md:px-12 lg:px-20",
+    },
+    contact: {
+      bgColor: "bg-white",
+      spacing: "py-20 px-6 md:px-12 lg:px-20",
+    },
+    cta: {
+      bgColor: "bg-[#1B1E25]",
+      spacing: "py-20 px-6 md:px-12 lg:px-20",
+    },
+  },
 };

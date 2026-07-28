@@ -10,23 +10,7 @@ import AnimatedCard from "@/components/ui/AnimatedCard";
 import { typography } from "@/constants/typography";
 import { layout } from "@/constants/layout";
 import { aboutData } from "@/constants/aboutData";
-
-const listVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 12 },
-  show: { opacity: 1, y: 0 },
-};
+import { motionVariants } from "@/constants/motionVariants";
 
 export default function AboutSection() {
   return (
@@ -57,13 +41,13 @@ export default function AboutSection() {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.3 }}
-                  variants={listVariants}
+                  variants={motionVariants.listContainer}
                 >
                   {aboutData.highlights.map((highlight) => (
                     <motion.li
                       key={highlight}
                       className="flex gap-3"
-                      variants={itemVariants}
+                      variants={motionVariants.listItem}
                     >
                       <span className="text-orange-500 font-bold">✓</span>
                       <span className="text-gray-700">{highlight}</span>
